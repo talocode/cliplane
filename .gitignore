@@ -15,3 +15,11 @@ cliploop-vite/node_modules
 cliploop-vite/dist
 cliploop-vite/.env
 cliploop-vite/tsconfig.tsbuildinfo
+
+# Generated site output
+public/index.html
+public/assets/
+
+# MCP package build artifacts
+packages/cliploop-mcp/dist
+packages/cliploop-mcp/*.tgz

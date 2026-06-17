@@ -16,6 +16,7 @@ ClipLoop is an open-source video workflow layer for builders and developers.
 
 - CLI: `@talocode/cliploop`
 - SDK: `@talocode/cliploop-sdk`
+- MCP: `@talocode/cliploop-mcp`
 
-The SDK is meant to help teams integrate ClipLoop into their own apps, dashboards, agents, and automation workflows.
+The SDK and MCP server are meant to help teams integrate ClipLoop into their own apps, dashboards, agents, chat clients, and automation workflows. Hosted rendering remains optional.
 

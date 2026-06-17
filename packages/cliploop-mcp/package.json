@@ -1,0 +1,36 @@
+{
+  "name": "@talocode/cliploop-mcp",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "ClipLoop MCP server for local video workflow tools and optional hosted renders.",
+  "bin": {
+    "cliploop-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "package.json",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "tsx --test test/**/*.test.ts",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@talocode/cliploop-sdk": "^0.1.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=18.18"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
