@@ -224,6 +224,46 @@ ClipLoop's promo video engine pipeline (ingest → plan → EDL → render → s
 
 ---
 
+## Renderer Layer
+
+ClipLoop supports multiple rendering backends:
+
+| Renderer | Status | Use Case |
+|----------|--------|----------|
+| Remotion | Supported | React-based programmatic videos |
+| ffmpeg | Supported | Clip stitching, audio, transcoding |
+| HTML Video | Experimental | Agent-authored HTML compositions |
+| HyperFrames | Planned | Advanced HTML-to-video workflows |
+| Cloud | Future | Hosted rendering API |
+
+### Renderer Selection
+
+- **Remotion**: React component videos, complex animations
+- **ffmpeg**: Post-processing, stitching, format conversion
+- **HTML Video**: Quick agent-authored compositions
+- **HyperFrames**: Advanced browser-rendered videos (external)
+- **Cloud**: Hosted rendering (future)
+
+### Architecture
+
+```
+ClipLoop Timeline
+       ↓
+  Renderer Layer
+       ↓
+  ┌────┴────┐
+  │         │
+Remotion  ffmpeg
+  │         │
+  └────┬────┘
+       ↓
+  MP4 Output
+```
+
+See [RENDERERS.md](./RENDERERS.md) for detailed renderer documentation.
+
+---
+
 ## TODO (Dev)
 
 - [ ] Remove `typescript.ignoreBuildErrors: true` from `next.config.ts` after all remaining TypeScript errors are fixed
