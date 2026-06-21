@@ -2,6 +2,30 @@
 
 Business model for ClipLoop's hosted API platform.
 
+## One-Key Access Model
+
+Everything runs through a single key:
+
+```
+CLIPLOOP_API_KEY
+```
+
+Users should not need separate keys for every provider when using the hosted ClipLoop API. ClipLoop handles provider orchestration behind `CLIPLOOP_API_KEY`. Research, script generation, B-roll, voiceover, rendering, captions, and publishing — all accessible through one authentication header.
+
+```bash
+curl -H "Authorization: Bearer $CLIPLOOP_API_KEY" \
+  -X POST https://api.cliploop.site/v1/videos \
+  -d '{"topic": "How Codra Code works", "duration": 60}'
+```
+
+The hosted API manages:
+- Provider key storage and rotation
+- Cost abstraction across providers
+- Rate limiting per key
+- Credit deduction per operation
+- Webhook callbacks for async operations
+- Asset storage and cleanup
+
 ## Core Model
 
 - **Pay-per-use credits** for API operations
@@ -27,6 +51,23 @@ Business model for ClipLoop's hosted API platform.
 | Render motion video | 15 | Full render with selected renderer |
 | Preview motion spec | 2 | Key frame preview (low-res) |
 | Template render | 12 | Template + brand overrides |
+
+### AI Video Production API
+
+| Operation | Credits | Description |
+|-----------|---------|-------------|
+| Research context | 2 | Gather public context from URLs |
+| Script generation | 3 | Generate structured script |
+| Scene planning | 2 | Break script into scenes |
+| B-roll planning | 1 | Plan visual assets per scene |
+| Asset generation | 5-20 | Generate images/video (varies by provider) |
+| Voiceover | 3 | Text-to-speech narration |
+| Avatar | 10 | AI avatar segment generation |
+| Motion spec | 2 | Full motion spec generation |
+| Render | 10-50 | Video rendering (varies by duration/quality) |
+| Export | 2 | Platform-specific export |
+| YouTube audit | 3 | Channel/video pattern analysis |
+| Motion spec from idea | 2 | Idea → motion spec conversion |
 
 ### Future
 
