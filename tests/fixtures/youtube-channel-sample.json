@@ -1,0 +1,91 @@
+{
+  "channel": {
+    "url": "https://www.youtube.com/channel/UCExample1234567890abcdef12",
+    "channelId": "UCExample1234567890abcdef12",
+    "name": "Example Tech Channel",
+    "description": "Building AI tools and developer workflows",
+    "subscriberCount": 45000,
+    "videoCount": 180,
+    "viewCount": 2500000,
+    "publishedAt": "2020-03-15T00:00:00Z",
+    "thumbnailUrl": null,
+    "country": "US"
+  },
+  "videos": [
+    {
+      "videoId": "vid001",
+      "url": "https://www.youtube.com/watch?v=vid001",
+      "title": "I Built an AI Coding Agent in One Weekend",
+      "description": "Building a local-first coding agent from scratch",
+      "duration": "PT7M42S",
+      "durationSeconds": 462,
+      "viewCount": 89000,
+      "likeCount": 2100,
+      "commentCount": 145,
+      "publishedAt": "2026-05-15T10:00:00Z",
+      "thumbnailUrl": null,
+      "tags": ["AI", "coding agent", "open source"],
+      "categoryId": "28"
+    },
+    {
+      "videoId": "vid002",
+      "url": "https://www.youtube.com/watch?v=vid002",
+      "title": "How to Set Up a Local AI Development Environment",
+      "description": "Step by step tutorial",
+      "duration": "PT5M15S",
+      "durationSeconds": 315,
+      "viewCount": 34000,
+      "likeCount": 890,
+      "commentCount": 67,
+      "publishedAt": "2026-05-22T10:00:00Z",
+      "thumbnailUrl": null,
+      "tags": ["tutorial", "AI", "development"],
+      "categoryId": "28"
+    },
+    {
+      "videoId": "vid003",
+      "url": "https://www.youtube.com/watch?v=vid003",
+      "title": "5 Things I Wish I Knew Before Building AI Tools",
+      "description": "Lessons from building open source AI products",
+      "duration": "PT6M30S",
+      "durationSeconds": 390,
+      "viewCount": 125000,
+      "likeCount": 3200,
+      "commentCount": 210,
+      "publishedAt": "2026-05-29T10:00:00Z",
+      "thumbnailUrl": null,
+      "tags": ["AI", "lessons", "open source"],
+      "categoryId": "28"
+    },
+    {
+      "videoId": "vid004",
+      "url": "https://www.youtube.com/watch?v=vid004",
+      "title": "Open Source AI Tools vs Closed Platforms: What Actually Matters",
+      "description": "Honest comparison of tooling approaches",
+      "duration": "PT8M10S",
+      "durationSeconds": 490,
+      "viewCount": 67000,
+      "likeCount": 1800,
+      "commentCount": 130,
+      "publishedAt": "2026-06-05T10:00:00Z",
+      "thumbnailUrl": null,
+      "tags": ["comparison", "open source", "AI tools"],
+      "categoryId": "28"
+    },
+    {
+      "videoId": "vid005",
+      "url": "https://www.youtube.com/watch?v=vid005",
+      "title": "Building a Terminal UI for My AI Agent",
+      "description": "Design and build a polished TUI",
+      "duration": "PT9M45S",
+      "durationSeconds": 585,
+      "viewCount": 42000,
+      "likeCount": 1100,
+      "commentCount": 85,
+      "publishedAt": "2026-06-12T10:00:00Z",
+      "thumbnailUrl": null,
+      "tags": ["TUI", "terminal", "AI agent", "build log"],
+      "categoryId": "28"
+    }
+  ]
+}

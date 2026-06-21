@@ -16,6 +16,8 @@ Authorization: Bearer $CLIPLOOP_API_KEY
 
 ### POST /v1/youtube/audit-channel
 
+**Status: Implemented** ✅
+
 Analyze a public YouTube channel's metadata and content patterns.
 
 **Request:**
