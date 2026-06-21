@@ -1,0 +1,282 @@
+{
+  "id": "saas-motion-launch",
+  "name": "SaaS Motion Launch",
+  "description": "Product launch video template with hook, logo reveal, problem/pain, workflow diagram, feature cards, proof, and CTA scenes.",
+  "version": "0.1",
+  "duration": 54,
+  "fps": 60,
+  "resolution": { "width": 1920, "height": 1080 },
+  "scenes": [
+    {
+      "id": "hook",
+      "type": "title",
+      "attentionRole": "hook",
+      "duration": 3,
+      "background": { "type": "gradient", "angle": 135 },
+      "elements": [
+        {
+          "id": "hook-text",
+          "type": "text",
+          "position": { "x": 960, "y": 400 },
+          "size": { "width": 1200, "height": 120 },
+          "content": "{{script.hook}}",
+          "style": { "fontSize": 72, "fontWeight": 800, "textAlign": "center" },
+          "animations": { "entry": { "type": "fade", "duration": 0.4 } }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "fade", "duration": 0.3 },
+        "out": { "type": "cameraPush", "duration": 0.5 }
+      }
+    },
+    {
+      "id": "logo-reveal",
+      "type": "content",
+      "attentionRole": "retention",
+      "duration": 3,
+      "background": { "type": "gradient", "angle": 180 },
+      "elements": [
+        {
+          "id": "logo",
+          "type": "logo",
+          "position": { "x": 960, "y": 400 },
+          "size": { "width": 200, "height": 200 },
+          "animations": {
+            "entry": { "type": "scale", "duration": 0.6, "delay": 0.2 },
+            "loop": { "type": "pulse", "speed": 2, "amount": 0.02 }
+          }
+        },
+        {
+          "id": "brand-name",
+          "type": "text",
+          "position": { "x": 960, "y": 540 },
+          "size": { "width": 600, "height": 60 },
+          "content": "{{brand.name}}",
+          "style": { "fontSize": 48, "fontWeight": 700, "textAlign": "center" },
+          "animations": { "entry": { "type": "fade", "duration": 0.5, "delay": 0.4 } }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "cameraPush", "duration": 0.5 },
+        "out": { "type": "slide", "duration": 0.4 }
+      }
+    },
+    {
+      "id": "problem-pain",
+      "type": "content",
+      "attentionRole": "emotion",
+      "duration": 5,
+      "background": { "type": "solid" },
+      "camera": {
+        "start": { "x": 0, "y": 0, "zoom": 1.0 },
+        "end": { "x": 30, "y": -15, "zoom": 1.08 },
+        "easing": "ease-in-out"
+      },
+      "elements": [
+        {
+          "id": "pain-title",
+          "type": "text",
+          "position": { "x": 960, "y": 300 },
+          "size": { "width": 1000, "height": 80 },
+          "content": "The problem",
+          "style": { "fontSize": 56, "fontWeight": 700, "textAlign": "center" },
+          "animations": { "entry": { "type": "slide", "from": "top", "duration": 0.5 } }
+        },
+        {
+          "id": "pain-card",
+          "type": "card",
+          "position": { "x": 960, "y": 480 },
+          "size": { "width": 800, "height": 200 },
+          "content": "{{script.sections[0]}}",
+          "style": { "background": "rgba(255,255,255,0.05)", "borderRadius": 16, "border": "1px solid rgba(255,255,255,0.1)" },
+          "animations": { "entry": { "type": "fade", "duration": 0.6, "delay": 0.3 } }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "slide", "duration": 0.4 },
+        "out": { "type": "fade", "duration": 0.3 }
+      }
+    },
+    {
+      "id": "workflow-diagram",
+      "type": "content",
+      "attentionRole": "retention",
+      "duration": 8,
+      "background": { "type": "gradient", "angle": 135 },
+      "elements": [
+        {
+          "id": "wf-title",
+          "type": "text",
+          "position": { "x": 960, "y": 180 },
+          "size": { "width": 800, "height": 60 },
+          "content": "How it works",
+          "style": { "fontSize": 44, "fontWeight": 700, "textAlign": "center" },
+          "animations": { "entry": { "type": "fade", "duration": 0.4 } }
+        },
+        {
+          "id": "wf-card-1",
+          "type": "workflowCard",
+          "position": { "x": 360, "y": 420 },
+          "size": { "width": 300, "height": 180 },
+          "content": "{{script.sections[0]}}",
+          "style": { "stepNumber": 1, "background": "rgba(255,255,255,0.06)", "borderRadius": 12 },
+          "animations": { "entry": { "type": "stagger", "duration": 0.5, "delay": 0.3, "staggerDelay": 0.2 } }
+        },
+        {
+          "id": "wf-card-2",
+          "type": "workflowCard",
+          "position": { "x": 960, "y": 420 },
+          "size": { "width": 300, "height": 180 },
+          "content": "{{script.sections[1]}}",
+          "style": { "stepNumber": 2, "background": "rgba(255,255,255,0.06)", "borderRadius": 12 },
+          "animations": { "entry": { "type": "stagger", "duration": 0.5, "delay": 0.5, "staggerDelay": 0.2 } }
+        },
+        {
+          "id": "wf-card-3",
+          "type": "workflowCard",
+          "position": { "x": 1560, "y": 420 },
+          "size": { "width": 300, "height": 180 },
+          "content": "{{script.sections[2]}}",
+          "style": { "stepNumber": 3, "background": "rgba(255,255,255,0.06)", "borderRadius": 12 },
+          "animations": { "entry": { "type": "stagger", "duration": 0.5, "delay": 0.7, "staggerDelay": 0.2 } }
+        },
+        {
+          "id": "wf-connector-1",
+          "type": "connector",
+          "from": "wf-card-1",
+          "to": "wf-card-2",
+          "style": { "stroke": "dashed", "strokeWidth": 2 },
+          "animations": { "entry": { "type": "drawLine", "duration": 0.6, "delay": 0.8 } }
+        },
+        {
+          "id": "wf-connector-2",
+          "type": "connector",
+          "from": "wf-card-2",
+          "to": "wf-card-3",
+          "style": { "stroke": "dashed", "strokeWidth": 2 },
+          "animations": { "entry": { "type": "drawLine", "duration": 0.6, "delay": 1.0 } }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "fade", "duration": 0.3 },
+        "out": { "type": "cameraPush", "duration": 0.5 }
+      }
+    },
+    {
+      "id": "feature-sequence",
+      "type": "content",
+      "attentionRole": "retention",
+      "duration": 12,
+      "background": { "type": "solid" },
+      "camera": {
+        "start": { "x": 0, "y": 0, "zoom": 1.0 },
+        "end": { "x": -20, "y": 10, "zoom": 1.04 },
+        "easing": "ease-in-out"
+      },
+      "elements": [
+        {
+          "id": "feature-1",
+          "type": "card",
+          "position": { "x": 480, "y": 400 },
+          "size": { "width": 400, "height": 260 },
+          "content": "{{script.sections[0]}}",
+          "style": { "background": "rgba(255,255,255,0.06)", "borderRadius": 16, "border": "1px solid rgba(255,255,255,0.1)" },
+          "animations": { "entry": { "type": "slide", "from": "left", "duration": 0.6, "delay": 0 } }
+        },
+        {
+          "id": "feature-2",
+          "type": "card",
+          "position": { "x": 960, "y": 400 },
+          "size": { "width": 400, "height": 260 },
+          "content": "{{script.sections[1]}}",
+          "style": { "background": "rgba(255,255,255,0.06)", "borderRadius": 16, "border": "1px solid rgba(255,255,255,0.1)" },
+          "animations": { "entry": { "type": "slide", "from": "bottom", "duration": 0.6, "delay": 4 } }
+        },
+        {
+          "id": "feature-3",
+          "type": "card",
+          "position": { "x": 1440, "y": 400 },
+          "size": { "width": 400, "height": 260 },
+          "content": "{{script.sections[2]}}",
+          "style": { "background": "rgba(255,255,255,0.06)", "borderRadius": 16, "border": "1px solid rgba(255,255,255,0.1)" },
+          "animations": { "entry": { "type": "slide", "from": "right", "duration": 0.6, "delay": 8 } }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "cameraPush", "duration": 0.5 },
+        "out": { "type": "fade", "duration": 0.4 }
+      }
+    },
+    {
+      "id": "proof-result",
+      "type": "content",
+      "attentionRole": "emotion",
+      "duration": 5,
+      "background": { "type": "gradient", "angle": 180 },
+      "elements": [
+        {
+          "id": "proof-stat",
+          "type": "text",
+          "position": { "x": 960, "y": 360 },
+          "size": { "width": 800, "height": 100 },
+          "content": "{{script.sections[0]}}",
+          "style": { "fontSize": 48, "fontWeight": 600, "textAlign": "center" },
+          "animations": { "entry": { "type": "countUp", "duration": 1.5, "delay": 0.3 } }
+        },
+        {
+          "id": "proof-label",
+          "type": "text",
+          "position": { "x": 960, "y": 480 },
+          "size": { "width": 600, "height": 50 },
+          "content": "Trusted by developers",
+          "style": { "fontSize": 24, "fontWeight": 400, "textAlign": "center", "color": "muted" },
+          "animations": { "entry": { "type": "fade", "duration": 0.5, "delay": 1.0 } }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "fade", "duration": 0.3 },
+        "out": { "type": "cameraPush", "duration": 0.4 }
+      }
+    },
+    {
+      "id": "cta",
+      "type": "cta",
+      "attentionRole": "distribution",
+      "duration": 4,
+      "background": { "type": "gradient", "angle": 135 },
+      "elements": [
+        {
+          "id": "cta-text",
+          "type": "text",
+          "position": { "x": 960, "y": 360 },
+          "size": { "width": 1000, "height": 80 },
+          "content": "{{script.cta}}",
+          "style": { "fontSize": 56, "fontWeight": 800, "textAlign": "center" },
+          "animations": { "entry": { "type": "scale", "from": 0.8, "duration": 0.5 } }
+        },
+        {
+          "id": "cta-logo",
+          "type": "logo",
+          "position": { "x": 960, "y": 500 },
+          "size": { "width": 80, "height": 80 },
+          "animations": { "entry": { "type": "fade", "duration": 0.4, "delay": 0.3 } }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "cameraPush", "duration": 0.4 },
+        "out": { "type": "fade", "duration": 0.5 }
+      }
+    }
+  ],
+  "exports": [
+    { "format": "mp4", "aspectRatio": "16:9", "fps": 60, "quality": "high", "codec": "h264" }
+  ],
+  "placeholders": {
+    "script.hook": { "type": "string", "required": true, "description": "Opening hook line" },
+    "script.sections": { "type": "array", "required": true, "description": "Feature/section text array (2-4 items)" },
+    "script.cta": { "type": "string", "required": true, "description": "Call to action text" },
+    "brand.name": { "type": "string", "required": true, "description": "Brand/product name" },
+    "brand.colors": { "type": "object", "required": true, "description": "Brand color palette" },
+    "brand.logo": { "type": "string", "required": false, "description": "Logo URL" }
+  }
+}

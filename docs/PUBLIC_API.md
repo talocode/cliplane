@@ -103,13 +103,16 @@ Generate a weekly promo video script + scene plan for your app. Ingest your app'
 |------|-------------|-------------|
 | `API_KEY_MISSING` | 401 | No `Authorization` header provided |
 | `API_KEY_INVALID` | 401 | API key not found, revoked, or malformed |
-| `SCOPE_DENIED` | 403 | Key is valid but lacks `weekly_promo:generate` scope |
+| `SCOPE_DENIED` | 403 | Key is valid but lacks required scope |
 | `IDEMPOTENCY_KEY_REQUIRED` | 400 | `Idempotency-Key` header missing or too short (< 8 chars) |
 | `IDEMPOTENCY_CONFLICT` | 409 | Same idempotency key used with different request body |
 | `IDEMPOTENCY_IN_PROGRESS` | 409 | Request with this idempotency key is still in progress |
 | `RATE_LIMIT_EXCEEDED` | 429 | Rate limit hit (3 requests per 60 seconds) |
 | `CREDITS_INSUFFICIENT` | 402 | Not enough credits. Includes `bucket`, `required`, `available` fields. |
 | `VALIDATION_ERROR` | 400 | Request body failed schema validation. Includes `fieldErrors`. |
+| `MOTION_SPEC_INVALID` | 400 | Motion spec failed validation. Includes `errors` array. |
+| `VIDEO_NOT_FOUND` | 404 | Video job not found. |
+| `RENDER_NOT_SUPPORTED` | 422 | Requested renderer cannot handle this spec. |
 
 Error response shape:
 
@@ -120,6 +123,191 @@ Error response shape:
   "bucket": "video_generation",
   "required": 5,
   "available": 2
+}
+```
+
+---
+
+## Motion Video Endpoints
+
+### POST /api/public/videos
+
+Create a motion video from a structured motion spec.
+
+#### Required Headers
+
+| Header | Description |
+|--------|-------------|
+| `Authorization: Bearer <api_key>` | API key with `motion:create` scope |
+| `Idempotency-Key: <unique_key>` | At least 8 characters. Replay-safe. |
+| `Content-Type: application/json` | Standard JSON content type |
+
+#### Request Body
+
+```json
+{
+  "template": "saas-motion-launch",
+  "brand": {
+    "name": "Codra",
+    "colors": {
+      "background": "#0b0f14",
+      "primary": "#ffffff",
+      "accent": "#ef476f"
+    },
+    "logo": "https://example.com/logo.svg"
+  },
+  "script": {
+    "hook": "Install a local-first coding agent in one command.",
+    "sections": [
+      "Runs inside your own dev environment",
+      "Plans before it acts",
+      "Tracks threads, permissions, and activity"
+    ],
+    "cta": "npm install -g @talocode/codra-code"
+  },
+  "output": {
+    "aspectRatio": "16:9",
+    "fps": 60,
+    "quality": "high"
+  }
+}
+```
+
+#### Success Response (200)
+
+```json
+{
+  "id": "video_abc123",
+  "status": "queued",
+  "previewUrl": null,
+  "downloadUrl": null
+}
+```
+
+---
+
+### POST /api/public/videos/:id/render
+
+Trigger rendering for a queued video.
+
+#### Response (200)
+
+```json
+{
+  "id": "video_abc123",
+  "status": "rendering",
+  "estimatedSeconds": 45
+}
+```
+
+---
+
+### GET /api/public/videos/:id
+
+Get video status and metadata.
+
+#### Response (200)
+
+```json
+{
+  "id": "video_abc123",
+  "status": "completed",
+  "title": "Product launch video",
+  "duration": 54,
+  "resolution": { "width": 1920, "height": 1080 },
+  "fps": 60,
+  "scenes": 7,
+  "createdAt": "2026-06-21T10:00:00Z",
+  "renderedAt": "2026-06-21T10:01:12Z",
+  "previewUrl": "https://storage.cliploop.site/preview/abc123.jpg",
+  "downloadUrl": "https://storage.cliploop.site/video/abc123.mp4",
+  "creditsCharged": 10
+}
+```
+
+| Status | Description |
+|--------|-------------|
+| `queued` | Waiting for render worker |
+| `rendering` | Currently rendering |
+| `completed` | Video ready for download |
+| `failed` | Render failed (check `error` field) |
+
+---
+
+### GET /api/public/videos/:id/download
+
+Get a signed download URL.
+
+#### Response (200)
+
+```json
+{
+  "downloadUrl": "https://storage.cliploop.site/video/abc123.mp4?token=...",
+  "expiresAt": "2026-06-21T11:00:00Z",
+  "format": "mp4",
+  "fileSizeBytes": 45219840
+}
+```
+
+---
+
+### POST /api/public/templates/:id/render
+
+Render a video from a template with brand/script overrides.
+
+#### Request Body
+
+```json
+{
+  "brand": {
+    "name": "MyApp",
+    "colors": {
+      "background": "#0a0a0a",
+      "primary": "#ffffff",
+      "accent": "#6366f1"
+    }
+  },
+  "script": {
+    "hook": "Ship faster with AI.",
+    "sections": ["Automated code review", "Smart refactoring"],
+    "cta": "Try MyApp free"
+  }
+}
+```
+
+#### Response (200)
+
+```json
+{
+  "id": "video_def456",
+  "status": "queued",
+  "template": "saas-motion-launch",
+  "previewUrl": null,
+  "downloadUrl": null
+}
+```
+
+---
+
+### POST /api/public/motion/preview
+
+Generate a low-res preview of a motion spec without full rendering.
+
+#### Request Body
+
+Motion spec JSON (full or partial).
+
+#### Response (200)
+
+```json
+{
+  "previewFrames": [
+    { "time": 0, "imageUrl": "https://storage.cliploop.site/preview/frame-0.jpg" },
+    { "time": 3, "imageUrl": "https://storage.cliploop.site/preview/frame-3.jpg" }
+  ],
+  "sceneCount": 7,
+  "estimatedDuration": 54,
+  "warnings": ["Scene 4 exceeds recommended 6s duration"]
 }
 ```
 

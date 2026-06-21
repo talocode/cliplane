@@ -354,3 +354,88 @@ Use this system when creating videos for:
 - Talocode ecosystem announcements
 - Feature releases
 - Tutorial content
+
+## Motion Product Video Standard
+
+Quality rules for programmatic motion product videos generated via the ClipLoop Motion API.
+
+### Pacing
+
+- First 3 seconds must create curiosity or show value immediately
+- One idea per scene
+- Scenes should not exceed 15 seconds
+- Alternate visual density (dense → sparse → dense)
+- Every 3-5 seconds should visually earn attention
+
+### Motion Purpose
+
+- Motion supports meaning, never random
+- Animations should reveal, emphasize, or connect
+- No animation without purpose
+- Staggered entrances create rhythm
+- Camera movement adds depth, not distraction
+
+### Typography
+
+- Typography must be readable at all times
+- Minimum font size: 24px at 1080p
+- High contrast against background
+- Headlines: bold, impactful, centered
+- Body text: clean, legible, properly spaced
+- No decorative fonts for information
+
+### Brand and Logo
+
+- Logo animation must be restrained (scale-in, fade)
+- Logo appears in first or last scene, not both
+- Brand colors applied consistently across all scenes
+- Color palette limited to 4-5 colors max
+- Never let brand elements overshadow content
+
+### Workflow Diagrams
+
+- Workflow cards should tell a story (problem → solution → result)
+- Connectors animate with draw-on effect
+- Step numbers or labels must be visible
+- Max 4 steps per workflow diagram
+- Cards should have consistent sizing
+
+### CTA
+
+- CTA must be visible and readable in the last 3-5 seconds
+- Include product name and action verb
+- Terminal/command mockups work well for developer tools
+- URL or install command should be prominent
+- CTA scene should be the simplest scene
+
+### Sound-Off Design
+
+- Video must work without sound
+- All critical information visible as text
+- Captions for narration-dependent content
+- Visual storytelling over voice-over dependency
+
+### Aspect Ratio Planning
+
+- 16:9 for product demos, presentations, YouTube
+- 9:16 for social shorts, Stories, TikTok
+- 1:1 for Instagram feed, LinkedIn
+- Design motion spec for primary ratio, adapt later
+
+### Quality Checklist
+
+Before rendering a motion product video:
+
+- [ ] Hook creates curiosity in first 3 seconds
+- [ ] One idea per scene
+- [ ] Motion supports meaning
+- [ ] No random animation
+- [ ] Typography readable at all times
+- [ ] Logo animation restrained
+- [ ] Workflow cards tell a story
+- [ ] CTA visible and clear
+- [ ] Video works without sound
+- [ ] Brand system consistent across scenes
+- [ ] Scene count reasonable (≤ 20)
+- [ ] Total duration appropriate (≤ 120s)
+- [ ] Export planned for target platform

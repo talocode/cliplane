@@ -1,0 +1,582 @@
+{
+  "version": "0.1",
+  "title": "Codra Code — Local-First Coding Agent",
+  "duration": 54,
+  "fps": 60,
+  "resolution": {
+    "width": 1920,
+    "height": 1080
+  },
+  "brand": {
+    "name": "Codra Code",
+    "colors": {
+      "background": "#0b0f14",
+      "primary": "#ffffff",
+      "accent": "#ef476f",
+      "secondary": "#06d6a0",
+      "muted": "#8892b0"
+    },
+    "logo": null,
+    "fontFamily": "Inter, system-ui, sans-serif"
+  },
+  "audio": {
+    "voiceover": null,
+    "backgroundMusic": null,
+    "sfx": []
+  },
+  "scenes": [
+    {
+      "id": "scene-hook",
+      "start": 0,
+      "duration": 3,
+      "type": "title",
+      "attentionRole": "hook",
+      "background": {
+        "type": "gradient",
+        "start": "#0b0f14",
+        "end": "#1a1f2e",
+        "angle": 135
+      },
+      "camera": {
+        "start": { "x": 0, "y": 0, "zoom": 1.0 },
+        "end": { "x": 0, "y": -10, "zoom": 1.05 },
+        "easing": "ease-in-out"
+      },
+      "elements": [
+        {
+          "id": "hook-text",
+          "type": "text",
+          "position": { "x": 960, "y": 380 },
+          "size": { "width": 1200, "height": 120 },
+          "content": "A coding agent that runs on your machine.",
+          "style": {
+            "fontSize": 72,
+            "fontWeight": 800,
+            "color": "#ffffff",
+            "textAlign": "center",
+            "fontFamily": "Inter, sans-serif"
+          },
+          "animations": {
+            "entry": { "type": "fade", "duration": 0.5, "delay": 0 },
+            "exit": { "type": "fade", "duration": 0.3 }
+          }
+        },
+        {
+          "id": "hook-sub",
+          "type": "text",
+          "position": { "x": 960, "y": 490 },
+          "size": { "width": 800, "height": 50 },
+          "content": "No cloud. No vendor lock-in.",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 400,
+            "color": "#8892b0",
+            "textAlign": "center"
+          },
+          "animations": {
+            "entry": { "type": "fade", "duration": 0.4, "delay": 0.4 }
+          }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "fade", "duration": 0.3 },
+        "out": { "type": "cameraPush", "duration": 0.5 }
+      },
+      "captions": [
+        {
+          "text": "A coding agent that runs on your machine.",
+          "start": 0,
+          "duration": 3,
+          "position": "bottom"
+        }
+      ]
+    },
+    {
+      "id": "scene-install",
+      "start": 3,
+      "duration": 4,
+      "type": "content",
+      "attentionRole": "retention",
+      "background": {
+        "type": "gradient",
+        "start": "#0b0f14",
+        "end": "#111827",
+        "angle": 180
+      },
+      "elements": [
+        {
+          "id": "install-label",
+          "type": "text",
+          "position": { "x": 960, "y": 280 },
+          "size": { "width": 600, "height": 50 },
+          "content": "Install in one command",
+          "style": {
+            "fontSize": 32,
+            "fontWeight": 600,
+            "color": "#8892b0",
+            "textAlign": "center"
+          },
+          "animations": {
+            "entry": { "type": "fade", "duration": 0.4, "delay": 0 }
+          }
+        },
+        {
+          "id": "terminal-frame",
+          "type": "terminalFrame",
+          "position": { "x": 960, "y": 440 },
+          "size": { "width": 800, "height": 160 },
+          "content": "$ npm install -g @talocode/codra-code\n✓ Installed codra-code@0.2.3",
+          "style": {
+            "background": "#0d1117",
+            "borderRadius": 12,
+            "border": "1px solid #30363d",
+            "fontSize": 20,
+            "color": "#06d6a0",
+            "fontFamily": "JetBrains Mono, monospace"
+          },
+          "animations": {
+            "entry": { "type": "typewriter", "duration": 1.5, "delay": 0.3, "speed": 30 }
+          }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "cameraPush", "duration": 0.5 },
+        "out": { "type": "slide", "duration": 0.4 }
+      },
+      "captions": [
+        {
+          "text": "Install globally with npm",
+          "start": 0.5,
+          "duration": 3,
+          "position": "bottom"
+        }
+      ]
+    },
+    {
+      "id": "scene-workflow",
+      "start": 7,
+      "duration": 10,
+      "type": "content",
+      "attentionRole": "retention",
+      "background": {
+        "type": "gradient",
+        "start": "#0b0f14",
+        "end": "#1a1f2e",
+        "angle": 135
+      },
+      "camera": {
+        "start": { "x": 0, "y": 0, "zoom": 1.0 },
+        "end": { "x": 20, "y": -10, "zoom": 1.06 },
+        "easing": "ease-in-out"
+      },
+      "elements": [
+        {
+          "id": "wf-title",
+          "type": "text",
+          "position": { "x": 960, "y": 160 },
+          "size": { "width": 800, "height": 60 },
+          "content": "How Codra works",
+          "style": {
+            "fontSize": 44,
+            "fontWeight": 700,
+            "color": "#ffffff",
+            "textAlign": "center"
+          },
+          "animations": {
+            "entry": { "type": "fade", "duration": 0.4 }
+          }
+        },
+        {
+          "id": "wf-step-1",
+          "type": "workflowCard",
+          "position": { "x": 300, "y": 400 },
+          "size": { "width": 280, "height": 180 },
+          "content": "Read your codebase",
+          "style": {
+            "stepNumber": 1,
+            "background": "rgba(255,255,255,0.05)",
+            "borderRadius": 12,
+            "border": "1px solid rgba(255,255,255,0.08)",
+            "fontSize": 20,
+            "color": "#ffffff"
+          },
+          "animations": {
+            "entry": { "type": "stagger", "duration": 0.5, "delay": 0.3, "staggerDelay": 0.2 }
+          }
+        },
+        {
+          "id": "wf-step-2",
+          "type": "workflowCard",
+          "position": { "x": 960, "y": 400 },
+          "size": { "width": 280, "height": 180 },
+          "content": "Plan before acting",
+          "style": {
+            "stepNumber": 2,
+            "background": "rgba(255,255,255,0.05)",
+            "borderRadius": 12,
+            "border": "1px solid rgba(255,255,255,0.08)",
+            "fontSize": 20,
+            "color": "#ffffff"
+          },
+          "animations": {
+            "entry": { "type": "stagger", "duration": 0.5, "delay": 0.5, "staggerDelay": 0.2 }
+          }
+        },
+        {
+          "id": "wf-step-3",
+          "type": "workflowCard",
+          "position": { "x": 1620, "y": 400 },
+          "size": { "width": 280, "height": 180 },
+          "content": "Apply changes safely",
+          "style": {
+            "stepNumber": 3,
+            "background": "rgba(255,255,255,0.05)",
+            "borderRadius": 12,
+            "border": "1px solid rgba(255,255,255,0.08)",
+            "fontSize": 20,
+            "color": "#ffffff"
+          },
+          "animations": {
+            "entry": { "type": "stagger", "duration": 0.5, "delay": 0.7, "staggerDelay": 0.2 }
+          }
+        },
+        {
+          "id": "wf-conn-1",
+          "type": "connector",
+          "from": "wf-step-1",
+          "to": "wf-step-2",
+          "style": {
+            "stroke": "dashed",
+            "strokeWidth": 2,
+            "strokeColor": "#8892b0"
+          },
+          "animations": {
+            "entry": { "type": "drawLine", "duration": 0.6, "delay": 1.0 }
+          }
+        },
+        {
+          "id": "wf-conn-2",
+          "type": "connector",
+          "from": "wf-step-2",
+          "to": "wf-step-3",
+          "style": {
+            "stroke": "dashed",
+            "strokeWidth": 2,
+            "strokeColor": "#8892b0"
+          },
+          "animations": {
+            "entry": { "type": "drawLine", "duration": 0.6, "delay": 1.2 }
+          }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "slide", "duration": 0.4 },
+        "out": { "type": "cameraPush", "duration": 0.5 }
+      },
+      "captions": [
+        {
+          "text": "Read → Plan → Apply",
+          "start": 1,
+          "duration": 4,
+          "position": "bottom"
+        }
+      ]
+    },
+    {
+      "id": "scene-features",
+      "start": 17,
+      "duration": 15,
+      "type": "content",
+      "attentionRole": "retention",
+      "background": {
+        "type": "solid",
+        "color": "#0b0f14"
+      },
+      "camera": {
+        "start": { "x": 0, "y": 0, "zoom": 1.0 },
+        "end": { "x": -15, "y": 8, "zoom": 1.04 },
+        "easing": "ease-in-out"
+      },
+      "elements": [
+        {
+          "id": "feat-title",
+          "type": "text",
+          "position": { "x": 960, "y": 160 },
+          "size": { "width": 800, "height": 60 },
+          "content": "Built for real software work",
+          "style": {
+            "fontSize": 44,
+            "fontWeight": 700,
+            "color": "#ffffff",
+            "textAlign": "center"
+          },
+          "animations": {
+            "entry": { "type": "fade", "duration": 0.4 }
+          }
+        },
+        {
+          "id": "feat-card-1",
+          "type": "card",
+          "position": { "x": 360, "y": 400 },
+          "size": { "width": 340, "height": 240 },
+          "content": "Plans & Threads\n\nTrack work across sessions with structured plans and persistent threads.",
+          "style": {
+            "background": "rgba(255,255,255,0.04)",
+            "borderRadius": 16,
+            "border": "1px solid rgba(255,255,255,0.08)",
+            "fontSize": 18,
+            "color": "#e2e8f0",
+            "padding": 24
+          },
+          "animations": {
+            "entry": { "type": "slide", "from": "left", "duration": 0.6, "delay": 0 }
+          }
+        },
+        {
+          "id": "feat-card-2",
+          "type": "card",
+          "position": { "x": 960, "y": 400 },
+          "size": { "width": 340, "height": 240 },
+          "content": "Permissions & Activity\n\nControl what the agent can do. Track every action with full audit trail.",
+          "style": {
+            "background": "rgba(255,255,255,0.04)",
+            "borderRadius": 16,
+            "border": "1px solid rgba(255,255,255,0.08)",
+            "fontSize": 18,
+            "color": "#e2e8f0",
+            "padding": 24
+          },
+          "animations": {
+            "entry": { "type": "slide", "from": "bottom", "duration": 0.6, "delay": 5 }
+          }
+        },
+        {
+          "id": "feat-card-3",
+          "type": "card",
+          "position": { "x": 1560, "y": 400 },
+          "size": { "width": 340, "height": 240 },
+          "content": "Context & Skills\n\nLoad project context and activate skills that adapt Codra to your task.",
+          "style": {
+            "background": "rgba(255,255,255,0.04)",
+            "borderRadius": 16,
+            "border": "1px solid rgba(255,255,255,0.08)",
+            "fontSize": 18,
+            "color": "#e2e8f0",
+            "padding": 24
+          },
+          "animations": {
+            "entry": { "type": "slide", "from": "right", "duration": 0.6, "delay": 10 }
+          }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "cameraPush", "duration": 0.5 },
+        "out": { "type": "fade", "duration": 0.4 }
+      }
+    },
+    {
+      "id": "scene-provider",
+      "start": 32,
+      "duration": 6,
+      "type": "content",
+      "attentionRole": "retention",
+      "background": {
+        "type": "gradient",
+        "start": "#111827",
+        "end": "#0b0f14",
+        "angle": 135
+      },
+      "elements": [
+        {
+          "id": "provider-title",
+          "type": "text",
+          "position": { "x": 960, "y": 300 },
+          "size": { "width": 800, "height": 60 },
+          "content": "Provider agnostic",
+          "style": {
+            "fontSize": 48,
+            "fontWeight": 700,
+            "color": "#ffffff",
+            "textAlign": "center"
+          },
+          "animations": {
+            "entry": { "type": "fade", "duration": 0.4 }
+          }
+        },
+        {
+          "id": "provider-list",
+          "type": "text",
+          "position": { "x": 960, "y": 400 },
+          "size": { "width": 600, "height": 80 },
+          "content": "OpenAI · Ollama · Mock · more",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 400,
+            "color": "#8892b0",
+            "textAlign": "center"
+          },
+          "animations": {
+            "entry": { "type": "fade", "duration": 0.5, "delay": 0.3 }
+          }
+        },
+        {
+          "id": "provider-sub",
+          "type": "text",
+          "position": { "x": 960, "y": 480 },
+          "size": { "width": 700, "height": 50 },
+          "content": "Use any model. Keep your keys local.",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 400,
+            "color": "#06d6a0",
+            "textAlign": "center"
+          },
+          "animations": {
+            "entry": { "type": "fade", "duration": 0.4, "delay": 0.6 }
+          }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "fade", "duration": 0.3 },
+        "out": { "type": "cameraPush", "duration": 0.4 }
+      }
+    },
+    {
+      "id": "scene-open-source",
+      "start": 38,
+      "duration": 5,
+      "type": "content",
+      "attentionRole": "emotion",
+      "background": {
+        "type": "gradient",
+        "start": "#0b0f14",
+        "end": "#1a1024",
+        "angle": 180
+      },
+      "elements": [
+        {
+          "id": "os-badge",
+          "type": "text",
+          "position": { "x": 960, "y": 320 },
+          "size": { "width": 400, "height": 60 },
+          "content": "MIT LICENSED",
+          "style": {
+            "fontSize": 32,
+            "fontWeight": 800,
+            "color": "#ef476f",
+            "textAlign": "center",
+            "letterSpacing": 4
+          },
+          "animations": {
+            "entry": { "type": "scale", "from": 0.6, "duration": 0.5 }
+          }
+        },
+        {
+          "id": "os-text",
+          "type": "text",
+          "position": { "x": 960, "y": 420 },
+          "size": { "width": 800, "height": 80 },
+          "content": "Open source.\nFork it. Ship it. Make it yours.",
+          "style": {
+            "fontSize": 36,
+            "fontWeight": 600,
+            "color": "#ffffff",
+            "textAlign": "center"
+          },
+          "animations": {
+            "entry": { "type": "fade", "duration": 0.5, "delay": 0.3 }
+          }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "cameraPush", "duration": 0.4 },
+        "out": { "type": "fade", "duration": 0.5 }
+      }
+    },
+    {
+      "id": "scene-cta",
+      "start": 43,
+      "duration": 5,
+      "type": "cta",
+      "attentionRole": "distribution",
+      "background": {
+        "type": "gradient",
+        "start": "#0b0f14",
+        "end": "#1a1f2e",
+        "angle": 135
+      },
+      "camera": {
+        "start": { "x": 0, "y": 0, "zoom": 1.0 },
+        "end": { "x": 0, "y": 0, "zoom": 1.03 },
+        "easing": "ease-out"
+      },
+      "elements": [
+        {
+          "id": "cta-headline",
+          "type": "text",
+          "position": { "x": 960, "y": 340 },
+          "size": { "width": 1000, "height": 80 },
+          "content": "Start building with Codra Code",
+          "style": {
+            "fontSize": 52,
+            "fontWeight": 800,
+            "color": "#ffffff",
+            "textAlign": "center"
+          },
+          "animations": {
+            "entry": { "type": "scale", "from": 0.85, "duration": 0.5 }
+          }
+        },
+        {
+          "id": "cta-command",
+          "type": "terminalFrame",
+          "position": { "x": 960, "y": 470 },
+          "size": { "width": 600, "height": 80 },
+          "content": "$ npm install -g @talocode/codra-code",
+          "style": {
+            "background": "#0d1117",
+            "borderRadius": 8,
+            "border": "1px solid #30363d",
+            "fontSize": 20,
+            "color": "#06d6a0",
+            "fontFamily": "JetBrains Mono, monospace"
+          },
+          "animations": {
+            "entry": { "type": "typewriter", "duration": 1.2, "delay": 0.3, "speed": 25 }
+          }
+        },
+        {
+          "id": "cta-link",
+          "type": "text",
+          "position": { "x": 960, "y": 570 },
+          "size": { "width": 600, "height": 40 },
+          "content": "github.com/talocode/codra",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#8892b0",
+            "textAlign": "center"
+          },
+          "animations": {
+            "entry": { "type": "fade", "duration": 0.4, "delay": 1.5 }
+          }
+        }
+      ],
+      "transitions": {
+        "in": { "type": "cameraPush", "duration": 0.4 },
+        "out": { "type": "fade", "duration": 0.8 }
+      }
+    }
+  ],
+  "exports": [
+    {
+      "format": "mp4",
+      "aspectRatio": "16:9",
+      "width": 1920,
+      "height": 1080,
+      "fps": 60,
+      "quality": "high",
+      "codec": "h264"
+    }
+  ]
+}

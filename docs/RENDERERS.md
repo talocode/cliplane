@@ -120,6 +120,87 @@ Remotion  ffmpeg
 - Real-time collaboration
 - AI-assisted composition
 
+## Motion Video Renderers
+
+The motion video API (`docs/MOTION_VIDEO_API.md`) uses a renderer-agnostic architecture. The motion spec describes what to render; the renderer decides how.
+
+### Motion Renderer Selection
+
+| Renderer | Best For | Latency | Quality |
+|----------|----------|---------|---------|
+| Remotion | Structured React components | Medium | High |
+| HTML Video | Agent-authored compositions | Fast | Medium |
+| Cloud Renderer (future) | Complex scenes, high volume | Variable | High |
+
+### Remotion Motion Renderer
+
+**Status:** Available (requires Remotion installed)
+
+Renders motion spec scenes as React components. Best for:
+- Structured compositions with consistent brand systems
+- Workflow diagrams and card sequences
+- Text-heavy product videos
+
+**Pipeline:**
+1. Parse motion spec
+2. Convert scenes → Remotion composition tree
+3. Render frames with `@remotion/renderer`
+4. Encode to MP4 with ffmpeg
+
+### HTML Video Motion Renderer
+
+**Status:** Scaffolded
+
+Renders motion spec scenes as HTML/CSS/JS compositions. Best for:
+- Quick prototyping
+- Agent-authored compositions
+- Browser-renderable motion graphics
+
+**Pipeline:**
+1. Parse motion spec
+2. Generate HTML per scene with CSS animations
+3. Capture via Puppeteer or HyperFrames
+4. Stitch frames to video
+
+### Cloud Renderer (Future)
+
+**Status:** Planned
+
+Hosted GPU rendering for:
+- Complex scenes with many elements
+- High-resolution output (4K)
+- Parallel render jobs
+- API-driven batch rendering
+
+### Preview Renderer
+
+**Status:** Scaffolded
+
+Generates low-resolution preview frames without full rendering:
+- Parse motion spec
+- Render key frames as static images
+- Return preview URLs for quick review
+
+### Renderer-Agnostic Design
+
+The motion API accepts any valid spec and routes to the best available renderer. If no renderer is available, the API returns the spec validation and scene plan without claiming video output.
+
+```
+Motion Spec
+  ↓
+Schema Validation
+  ↓
+Renderer Availability Check
+  ↓
+┌──────────┬──────────┐
+│ Remotion │ HTML     │ ← Available renderers
+│ (ready)  │ (ready)  │
+└──────────┴─────┬────┘
+                 ↓
+           Video Output
+           or "renderer_unavailable"
+```
+
 ## Notes
 
 - Remotion is the recommended default
@@ -127,3 +208,5 @@ Remotion  ffmpeg
 - HTML Video is experimental
 - HyperFrames integration is planned
 - Cloud rendering is future work
+- Motion API is renderer-agnostic by design
+- No renderer should claim success without actual output
