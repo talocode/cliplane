@@ -291,7 +291,9 @@ Render a video from a template with brand/script overrides.
 
 ### POST /api/public/motion/preview
 
-Generate a low-res preview of a motion spec without full rendering.
+**Status: Implemented** ✅
+
+Generate a self-contained HTML preview of a motion spec. No video is rendered.
 
 #### Request Body
 

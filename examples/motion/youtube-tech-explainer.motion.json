@@ -1,0 +1,174 @@
+{
+  "version": "0.1",
+  "title": "Why Local-First Coding Agents Are Coming Back",
+  "duration": 60,
+  "fps": 60,
+  "resolution": { "width": 1920, "height": 1080 },
+  "platform": "youtube",
+  "brand": {
+    "name": "Talocode",
+    "colors": {
+      "background": "#0b0f14",
+      "primary": "#ffffff",
+      "accent": "#f97316",
+      "secondary": "#06d6a0",
+      "muted": "#8892b0"
+    },
+    "fontFamily": "Inter, system-ui, sans-serif"
+  },
+  "scenes": [
+    {
+      "id": "scene_hook",
+      "start": 0,
+      "duration": 3,
+      "type": "title",
+      "attentionRole": "hook",
+      "narration": "AI coding tools are powerful, but most forgot the developer's machine.",
+      "caption": "AI coding tools are powerful, but most forgot the developer's machine.",
+      "visualIntent": "Bold hook text with dark terminal background",
+      "elements": [],
+      "animations": [],
+      "broll": {
+        "assetType": "motion-graphic",
+        "prompt": "Bold text on dark background about local-first AI",
+        "cameraMotion": "slow-zoom-in",
+        "style": "cinematic",
+        "duration": 3,
+        "requiresExternalProvider": false
+      },
+      "transition": { "type": "cameraPush", "duration": 0.4 }
+    },
+    {
+      "id": "scene_context",
+      "start": 3,
+      "duration": 5,
+      "type": "content",
+      "attentionRole": "retention",
+      "narration": "Cloud-dependent agents lock you into someone else's infrastructure.",
+      "caption": "The cloud dependency problem",
+      "visualIntent": "Feature cards showing cloud vs local comparison",
+      "elements": [],
+      "animations": [],
+      "broll": {
+        "assetType": "motion-graphic",
+        "prompt": "Cloud vs local comparison cards on dark background",
+        "cameraMotion": "parallax",
+        "style": "clean",
+        "duration": 5,
+        "requiresExternalProvider": false
+      },
+      "transition": { "type": "cameraPush", "duration": 0.5 }
+    },
+    {
+      "id": "scene_explain",
+      "start": 8,
+      "duration": 15,
+      "type": "content",
+      "attentionRole": "retention",
+      "narration": "Local-first agents run on your machine, read your codebase, and keep your data private.",
+      "caption": "How local-first agents work",
+      "visualIntent": "Terminal showing agent reading and editing code locally",
+      "elements": [],
+      "animations": [],
+      "broll": {
+        "assetType": "screen-recording",
+        "prompt": "Dark terminal with AI agent editing code locally",
+        "cameraMotion": "slow-push",
+        "style": "terminal-aesthetic",
+        "duration": 15,
+        "requiresExternalProvider": false
+      },
+      "transition": { "type": "cameraPush", "duration": 0.4 }
+    },
+    {
+      "id": "scene_proof",
+      "start": 23,
+      "duration": 13,
+      "type": "content",
+      "attentionRole": "retention",
+      "narration": "Real results from real usage. No staging, no faking.",
+      "caption": "Real results from real usage",
+      "visualIntent": "Results metrics dashboard with animated counters",
+      "elements": [],
+      "animations": [],
+      "broll": {
+        "assetType": "motion-graphic",
+        "prompt": "Dark dashboard with metrics counting up",
+        "cameraMotion": "static",
+        "style": "data-visualization",
+        "duration": 13,
+        "requiresExternalProvider": false
+      },
+      "transition": { "type": "fade", "duration": 0.3 }
+    },
+    {
+      "id": "scene_implications",
+      "start": 36,
+      "duration": 11,
+      "type": "content",
+      "attentionRole": "emotion",
+      "narration": "This changes how you think about building software with AI.",
+      "caption": "The bigger picture",
+      "visualIntent": "Workflow diagram with connecting animated lines",
+      "elements": [],
+      "animations": [],
+      "broll": {
+        "assetType": "motion-graphic",
+        "prompt": "Connected workflow diagram animating on dark background",
+        "cameraMotion": "slow-pan",
+        "style": "diagram",
+        "duration": 11,
+        "requiresExternalProvider": false
+      },
+      "transition": { "type": "cameraPush", "duration": 0.4 }
+    },
+    {
+      "id": "scene_cta",
+      "start": 47,
+      "duration": 13,
+      "type": "cta",
+      "attentionRole": "distribution",
+      "narration": "Try it yourself. Link in the description.",
+      "caption": "Talocode — link in description",
+      "visualIntent": "Install command in terminal with product logo",
+      "elements": [],
+      "animations": [],
+      "broll": {
+        "assetType": "product-shot",
+        "prompt": "Terminal with install command, dark theme, Talocode branding",
+        "cameraMotion": "slow-zoom-out",
+        "style": "product-cta",
+        "duration": 13,
+        "requiresExternalProvider": false
+      },
+      "transition": { "type": "fade", "duration": 0.5 }
+    }
+  ],
+  "captions": [
+    { "text": "AI coding tools are powerful, but most forgot the developer's machine.", "position": "bottom", "fontSize": 28, "maxLineWidth": 50, "emphasisWords": ["powerful"], "style": "sans-serif" },
+    { "text": "The cloud dependency problem", "position": "bottom", "fontSize": 28, "maxLineWidth": 50, "emphasisWords": ["cloud"], "style": "sans-serif" },
+    { "text": "How local-first agents work", "position": "bottom", "fontSize": 28, "maxLineWidth": 50, "emphasisWords": ["local-first"], "style": "sans-serif" },
+    { "text": "Real results from real usage", "position": "bottom", "fontSize": 28, "maxLineWidth": 50, "emphasisWords": ["results"], "style": "sans-serif" },
+    { "text": "The bigger picture", "position": "bottom", "fontSize": 28, "maxLineWidth": 50, "emphasisWords": ["bigger"], "style": "sans-serif" },
+    { "text": "Talocode — link in description", "position": "bottom", "fontSize": 28, "maxLineWidth": 50, "emphasisWords": ["Talocode"], "style": "sans-serif" }
+  ],
+  "audioPlan": {
+    "voiceover": {
+      "text": "AI coding tools are powerful, but most forgot the developer's machine. Cloud-dependent agents lock you into someone else's infrastructure. Local-first agents run on your machine, read your codebase, and keep your data private. Real results from real usage. No staging, no faking. This changes how you think about building software with AI. Try it yourself. Link in the description.",
+      "style": "clear",
+      "duration": 60
+    },
+    "backgroundMusic": null,
+    "sfx": []
+  },
+  "exports": [
+    { "format": "mp4", "aspectRatio": "16:9", "width": 1920, "height": 1080, "fps": 60, "quality": "high", "codec": "h264" }
+  ],
+  "approvalRequired": true,
+  "sourceMetadata": {
+    "ideaTitle": "Why Local-First Coding Agents Are Coming Back",
+    "ideaFormat": "tech-explainer",
+    "generatedAt": "2026-06-21T12:00:00Z",
+    "generator": "cliploop-youtube-motion-spec-v0.1"
+  }
+}
