@@ -182,7 +182,9 @@ Create a full script and storyboard for an approved video idea.
 
 ### POST /v1/youtube/create-motion-spec
 
-Convert a script into a ClipLoop motion spec.
+**Status: Implemented** ✅
+
+Convert a video idea into a ClipLoop motion spec with scene-by-scene breakdown, B-roll plans, and captions.
 
 **Request:**
 ```json
