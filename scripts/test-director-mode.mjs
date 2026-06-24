@@ -1,19 +1,12 @@
 #!/usr/bin/env node
 
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync, rmSync, writeFileSync } from 'fs';
 import { execSync } from 'child_process';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import * as createDirectionModule from '../src/lib/director/createDirection.ts';
-import * as reviseDirectionModule from '../src/lib/director/reviseDirection.ts';
-import * as validateModule from '../src/lib/director/validate.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = join(__dirname, '..');
-const createDirectorProject = createDirectionModule.createDirectorProject || createDirectionModule.default?.createDirectorProject;
-const reviseDirectorProject = reviseDirectionModule.reviseDirectorProject || reviseDirectionModule.default?.reviseDirectorProject;
-const validateDirectorCreateInput = validateModule.validateDirectorCreateInput || validateModule.default?.validateDirectorCreateInput;
-const validateDirectorReviseInput = validateModule.validateDirectorReviseInput || validateModule.default?.validateDirectorReviseInput;
 
 let passed = 0;
 let failed = 0;
@@ -32,6 +25,16 @@ function loadJson(relativePath) {
   return JSON.parse(readFileSync(join(repoRoot, relativePath), 'utf-8'));
 }
 
+function runTsxJson(code) {
+  const tempFile = join(repoRoot, '.director-test-eval.ts');
+  writeFileSync(tempFile, code, 'utf-8');
+  try {
+    return JSON.parse(execSync(`npx tsx "${tempFile}"`, { cwd: repoRoot, encoding: 'utf-8' }).trim());
+  } finally {
+    rmSync(tempFile, { force: true });
+  }
+}
+
 console.log('\n1. Endpoint existence');
 const createRoutePath = join(repoRoot, 'app/api/public/director/create/route.ts');
 const reviseRoutePath = join(repoRoot, 'app/api/public/director/revise/route.ts');
@@ -39,34 +42,60 @@ const createRouteBody = readFileSync(createRoutePath, 'utf-8');
 const reviseRouteBody = readFileSync(reviseRoutePath, 'utf-8');
 assert(existsSync(createRoutePath), 'Create endpoint file exists');
 assert(existsSync(reviseRoutePath), 'Revise endpoint file exists');
-assert(typeof createDirectorProject === 'function', 'Create director module export exists');
-assert(typeof reviseDirectorProject === 'function', 'Revise director module export exists');
-assert(typeof validateDirectorCreateInput === 'function', 'Create validation export exists');
-assert(typeof validateDirectorReviseInput === 'function', 'Revise validation export exists');
+const moduleExports = runTsxJson(`
+  import { createDirectorProject } from './src/lib/director/createDirection.ts';
+  import { reviseDirectorProject } from './src/lib/director/reviseDirection.ts';
+  import { validateDirectorCreateInput, validateDirectorReviseInput } from './src/lib/director/validate.ts';
+  console.log(JSON.stringify({
+    hasCreateDirectorProject: typeof createDirectorProject === 'function',
+    hasReviseDirectorProject: typeof reviseDirectorProject === 'function',
+    hasValidateDirectorCreateInput: typeof validateDirectorCreateInput === 'function',
+    hasValidateDirectorReviseInput: typeof validateDirectorReviseInput === 'function'
+  }));
+`);
+assert(moduleExports.hasCreateDirectorProject, 'Create director module export exists');
+assert(moduleExports.hasReviseDirectorProject, 'Revise director module export exists');
+assert(moduleExports.hasValidateDirectorCreateInput, 'Create validation export exists');
+assert(moduleExports.hasValidateDirectorReviseInput, 'Revise validation export exists');
 assert(createRouteBody.includes('POST /api/public/director/create'), 'Create endpoint path matches');
 assert(reviseRouteBody.includes('POST /api/public/director/revise'), 'Revise endpoint path matches');
 assert(createRouteBody.includes('NextResponse.json'), 'Create endpoint returns JSON responses');
 assert(reviseRouteBody.includes('NextResponse.json'), 'Revise endpoint returns JSON responses');
 
 console.log('\n2. Create validation');
-const emptyIdeaValidation = validateDirectorCreateInput({ idea: '' });
-assert(emptyIdeaValidation.success === false, 'Missing idea rejected');
-assert(emptyIdeaValidation.error.issues.some((item) => item.path.join('.') === 'idea'), 'Idea validation error returned');
-
-const httpUrlValidation = validateDirectorCreateInput({ idea: 'Launch ClipLoop Director Mode', productUrl: 'http://cliploop.dev' });
-assert(httpUrlValidation.success === false, 'Non-HTTPS productUrl rejected');
-assert(httpUrlValidation.error.issues.some((item) => item.path.join('.') === 'productUrl'), 'HTTPS validation error returned');
-
-const privateUrlValidation = validateDirectorCreateInput({ idea: 'Launch ClipLoop Director Mode', productUrl: 'https://127.0.0.1/demo' });
-assert(privateUrlValidation.success === false, 'Private/local URL rejected');
-assert(privateUrlValidation.error.issues.some((item) => item.path.join('.') === 'productUrl'), 'Private/local URL error returned');
-
-const longDurationValidation = validateDirectorCreateInput({ idea: 'Launch ClipLoop Director Mode', durationSeconds: 90 });
-assert(longDurationValidation.success === false, 'Duration over 60 seconds rejected');
-assert(longDurationValidation.error.issues.some((item) => item.path.join('.') === 'durationSeconds'), 'Duration validation error returned');
+const validations = runTsxJson(`
+  import { validateDirectorCreateInput } from './src/lib/director/validate.ts';
+  const emptyIdeaValidation = validateDirectorCreateInput({ idea: '' });
+  const httpUrlValidation = validateDirectorCreateInput({ idea: 'Launch ClipLoop Director Mode', productUrl: 'http://cliploop.dev' });
+  const privateUrlValidation = validateDirectorCreateInput({ idea: 'Launch ClipLoop Director Mode', productUrl: 'https://127.0.0.1/demo' });
+  const longDurationValidation = validateDirectorCreateInput({ idea: 'Launch ClipLoop Director Mode', durationSeconds: 90 });
+  console.log(JSON.stringify({
+    emptyIdeaSuccess: emptyIdeaValidation.success,
+    emptyIdeaPaths: emptyIdeaValidation.success ? [] : emptyIdeaValidation.error.issues.map((item) => item.path.join('.')),
+    httpUrlSuccess: httpUrlValidation.success,
+    httpUrlPaths: httpUrlValidation.success ? [] : httpUrlValidation.error.issues.map((item) => item.path.join('.')),
+    privateUrlSuccess: privateUrlValidation.success,
+    privateUrlPaths: privateUrlValidation.success ? [] : privateUrlValidation.error.issues.map((item) => item.path.join('.')),
+    longDurationSuccess: longDurationValidation.success,
+    longDurationPaths: longDurationValidation.success ? [] : longDurationValidation.error.issues.map((item) => item.path.join('.'))
+  }));
+`);
+assert(validations.emptyIdeaSuccess === false, 'Missing idea rejected');
+assert(validations.emptyIdeaPaths.includes('idea'), 'Idea validation error returned');
+assert(validations.httpUrlSuccess === false, 'Non-HTTPS productUrl rejected');
+assert(validations.httpUrlPaths.includes('productUrl'), 'HTTPS validation error returned');
+assert(validations.privateUrlSuccess === false, 'Private/local URL rejected');
+assert(validations.privateUrlPaths.includes('productUrl'), 'Private/local URL error returned');
+assert(validations.longDurationSuccess === false, 'Duration over 60 seconds rejected');
+assert(validations.longDurationPaths.includes('durationSeconds'), 'Duration validation error returned');
 
 console.log('\n3. Create success shape');
-const createJson = createDirectorProject(loadJson('examples/director/stacklane-launch.json'));
+const createJson = runTsxJson(`
+  import { createDirectorProject } from './src/lib/director/createDirection.ts';
+  import { readFileSync } from 'fs';
+  const input = JSON.parse(readFileSync('./examples/director/stacklane-launch.json', 'utf-8'));
+  console.log(JSON.stringify(createDirectorProject(input)));
+`);
 assert(createJson.ok === true, 'Create request succeeded');
 assert(Array.isArray(createJson.directorProject.scenePlan) && createJson.directorProject.scenePlan.length >= 4, 'Scene plan generated');
 assert(Array.isArray(createJson.directorProject.motionSpec.scenes) && createJson.directorProject.motionSpec.scenes.length >= 4, 'Motion spec generated');
@@ -82,9 +111,18 @@ const reviseInput = {
   directorProject: createJson.directorProject,
   revisionNote: 'Make it more premium and reduce the intro to 3 seconds with a stronger CTA',
 };
-const reviseValidation = validateDirectorReviseInput(reviseInput);
+const reviseValidation = runTsxJson(`
+  import { validateDirectorReviseInput } from './src/lib/director/validate.ts';
+  const input = ${JSON.stringify(reviseInput)};
+  const result = validateDirectorReviseInput(input);
+  console.log(JSON.stringify({ success: result.success }));
+`);
 assert(reviseValidation.success === true, 'Revise input validates');
-const reviseJson = reviseDirectorProject(reviseInput);
+const reviseJson = runTsxJson(`
+  import { reviseDirectorProject } from './src/lib/director/reviseDirection.ts';
+  const input = ${JSON.stringify(reviseInput)};
+  console.log(JSON.stringify(reviseDirectorProject(input)));
+`);
 assert(reviseJson.ok === true, 'Revise request succeeded');
 assert(reviseJson.directorProject.scenePlan[0].duration !== createJson.directorProject.scenePlan[0].duration || reviseJson.directorProject.videoConcept.ctaLine !== createJson.directorProject.videoConcept.ctaLine, 'Revision modifies the scene plan or CTA');
 assert(reviseJson.directorProject.motionSpec.transitionNotes.length === reviseJson.directorProject.scenePlan.length, 'Transition notes generated');

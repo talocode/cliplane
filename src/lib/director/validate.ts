@@ -2,6 +2,7 @@ import { z } from 'zod';
 import type {
   DirectorCreateInput,
   DirectorCreateResult,
+  DirectorDuration,
   DirectorProject,
   DirectorReviseInput,
 } from './types';
