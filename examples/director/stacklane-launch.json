@@ -1,0 +1,10 @@
+{
+  "idea": "Create a 20-second launch trailer for Stacklane showing that builders can ship backend infrastructure faster with a clear review-first video plan.",
+  "productName": "Stacklane",
+  "productUrl": "https://stacklane.dev",
+  "audience": "developers evaluating lighter backend tooling",
+  "platform": "youtube-shorts",
+  "durationSeconds": 20,
+  "tone": "premium",
+  "goal": "launch"
+}

@@ -130,6 +130,92 @@ Error response shape:
 
 ## Motion Video Endpoints
 
+### POST /api/public/director/create
+
+Create a draft direction project from a written product or campaign idea.
+
+#### Request Body
+
+```json
+{
+  "idea": "Create a 20-second launch trailer for Stacklane",
+  "productName": "Stacklane",
+  "productUrl": "https://stacklane.dev",
+  "audience": "developers evaluating lighter backend tooling",
+  "platform": "youtube-shorts",
+  "durationSeconds": 20,
+  "tone": "premium",
+  "goal": "launch"
+}
+```
+
+#### Success Response (200)
+
+```json
+{
+  "ok": true,
+  "directorProject": {
+    "id": "director_abc123",
+    "approvalRequired": true,
+    "renderedVideo": false
+  },
+  "warnings": [],
+  "disclaimer": "Draft video direction only. Review before rendering or publishing. No performance guaranteed."
+}
+```
+
+Notes:
+
+- HTTPS URLs only.
+- Localhost and private network URLs are rejected.
+- Director Mode returns a draft creative brief, scene plan, and motion spec only.
+- No render or publish step happens here.
+
+### POST /api/public/director/revise
+
+Revise an existing draft direction project with a conversational note.
+
+#### Request Body
+
+```json
+{
+  "directorProject": {},
+  "revisionNote": "Make it more premium and reduce the intro to 3 seconds"
+}
+```
+
+#### Success Response (200)
+
+```json
+{
+  "ok": true,
+  "directorProject": {
+    "revisionHistory": [
+      {
+        "revisionNote": "Make it more premium and reduce the intro to 3 seconds"
+      }
+    ],
+    "approvalRequired": true,
+    "renderedVideo": false
+  },
+  "warnings": [],
+  "disclaimer": "Draft video direction only. Review before rendering or publishing. No performance guaranteed."
+}
+```
+
+Supported direction updates:
+
+- shorten
+- extend
+- change tone
+- change platform
+- improve hook
+- add stronger CTA
+- make more technical
+- make more emotional
+- make more founder-led
+- simplify visuals
+
 ### POST /api/public/videos
 
 Create a motion video from a structured motion spec.

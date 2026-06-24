@@ -1,0 +1,10 @@
+{
+  "idea": "Turn LaunchPix into a short feature demo that explains how one screenshot becomes a polished launch visual set.",
+  "productName": "LaunchPix",
+  "productUrl": "https://launchpix.dev",
+  "audience": "indie builders preparing product launches",
+  "platform": "instagram-reels",
+  "durationSeconds": 30,
+  "tone": "educational",
+  "goal": "feature_demo"
+}

@@ -366,6 +366,21 @@ Notes:
 
 ## Current statuses
 
+## Director Mode
+
+ClipLoop Director Mode adds a conversational planning layer for draft video direction.
+
+- Create endpoint: `POST /api/public/director/create`
+- Revise endpoint: `POST /api/public/director/revise`
+- Alias paths: `/api/v1/director/create` and `/api/v1/director/revise`
+
+Director Mode returns a creative brief, video concept, scene plan, and motion spec draft. It is review-first by design:
+
+- `approvalRequired` is always `true`
+- `renderedVideo` is always `false`
+- no auto-publishing
+- no performance or virality guarantees
+
 Publish statuses:
 - `draft`, `approved`, `scheduled`, `publishing`, `published`, `failed`, `skipped`
 

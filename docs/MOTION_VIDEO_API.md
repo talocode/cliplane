@@ -8,6 +8,25 @@ ClipLoop evolves beyond slideshow-based social videos into a motion product vide
 
 The API is renderer-agnostic. A motion spec describes _what_ to render. A renderer decides _how_.
 
+## Director Mode Draft Integration
+
+Director Mode sits upstream of rendering. It creates a draft creative brief, scene plan, and motion spec using the same core motion contract already used by ClipLoop.
+
+Director Mode adds review-first planning metadata for:
+
+- transition notes
+- music direction
+- sound effect suggestions
+- CTA moment
+- platform adaptation notes
+
+Director Mode does not return a rendered video file. It always keeps:
+
+- `approvalRequired: true`
+- `renderedVideo: false`
+
+That means Director Mode is safe to use as a planning and revision layer before any separate render step.
+
 ## Architecture
 
 ```
